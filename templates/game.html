@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block title %}Boggle Game Main{% endblock %}
+
+{% block content %}
+
+<h1>Boggle your brain on this one!</h1>
+<div class = "game-board">
+    {% for word in board %}
+        {% for letter in word %}
+            <div class="box">{{letter}}</div>
+        {% endfor %}
+    {% endfor %}
+</div>
+<form action="/game.html">
+    
+</form>
+{% endblock %}

@@ -1,0 +1,21 @@
+.game-board {
+	display: grid;
+	grid-template-columns: 120px 120px 120px 120px 120px;
+	grid-template-rows: 120px 120px 120px 120px 120px 20px;
+	justify-content: center;
+}
+
+.box {
+	background-color: #d9d9d9;
+	border: 2px solid black;
+	text-align: center;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 35px;
+}
+
+h1 {
+	display: flex;
+	justify-content: center;
+}
