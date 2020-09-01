@@ -4,9 +4,11 @@
 
 {% block content %}
 
-<h1>This is the homepage!! The button below will start the game of Boggle!</h1>
+<h1 id="start">The button below will start the game of Boggle!</h1>
 
 <form action="/game" method="POST">
-    <button>Start Boggle</button>
+    <div class="container">
+        <button class="btn btn-dark btn-lg btn-block">Start Boggle</button>
+    </div>
 </form>
 {% endblock %}

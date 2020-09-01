@@ -1,0 +1,65 @@
+const form = document.querySelector('#form_guess');
+const input = document.querySelector('#search_input');
+const guesses = [];
+let $timer = 60;
+let $score = 0;
+document.getElementById('scoreboard').innerHTML = 'Score: ' + $score;
+document.getElementById('timer').innerHTML = 'Timer: ' + $timer;
+
+async function get_word_attempt(guess) {
+	const resp = await axios.get('/check-word', { params: { word: guess } });
+	let $search_term = guess;
+	//console.log($search_term);
+	//console.log(resp.data['result']);
+
+	if ((resp.data['result'] === 'ok') & (guesses.indexOf(guess) === -1)) {
+		//console.log('you got it');
+		$('#guesswordslist').append(`<li class="guesses correct">${guess}</li>`);
+		$('#scoredwordslist').append(`<li class="correct">${guess}</li>`);
+		guesses.push(guess);
+		$score = $score + guess.length;
+		document.getElementById('scoreboard').innerHTML = 'Score: ' + $score;
+	}
+	else if (resp.data['result'] === 'ok') {
+		//console.log('made it to duplicate loop');
+		if (guesses.indexOf(guess) !== -1) {
+			//console.log('duplicate!');
+			let $duplicate = $(`<div class="alert alert-warning alert-dismissible fade show text-center" role="alert">
+			<strong>${guess} : </strong> has already been used!!  ლ(▀̿̿Ĺ̯̿̿▀̿ლ)
+			<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+			  <span aria-hidden="true">&times;</span>
+			</button>
+		  </div>`);
+			$('#wrong').append($duplicate);
+		}
+	}
+	else if (resp.data['result'] === 'not-on-board') {
+		//console.log('not on board');
+		$('#guesswordslist').append(`<li class="not_on_board">${guess}</li>`);
+		guesses.push(guess);
+	}
+	else {
+		let $wrong = $(`<div class="alert alert-danger alert-dismissible fade show text-center" role="alert">
+		<strong>${guess} : </strong>That happens to not be a word (つ☢益☢)つ︵┻━┻
+		<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+		  <span aria-hidden="true">&times;</span>
+		</button>
+	  </div>`);
+		$('#wrong').append($wrong);
+		//console.log('not-word');
+	}
+}
+
+form.addEventListener('submit', function(e) {
+	e.preventDefault();
+	get_word_attempt(input.value);
+	input.value = '';
+});
+
+let decreaseTime = setInterval(function() {
+	$timer = $timer - 1;
+	document.getElementById('timer').innerHTML = 'Timer: ' + $timer;
+	if ($timer < 1) {
+		document.getElementById('timer').innerHTML = 'Expired!';
+	}
+}, 1000);

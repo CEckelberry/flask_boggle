@@ -5,14 +5,32 @@
 {% block content %}
 
 <h1>Boggle your brain on this one!</h1>
-<div class = "game-board">
-    {% for word in board %}
+<h3 id=scoreboard></h3>
+<div id="timer"></div>
+<div class = "game-board container">
+    {% for word in session['board'] %}
         {% for letter in word %}
             <div class="box">{{letter}}</div>
         {% endfor %}
     {% endfor %}
 </div>
-<form action="/game.html">
-    
+<br>
+<br>
+<div id="guessedwords">
+    <h2>Guessed Words:</h2>
+    <ul id="guesswordslist"></ul>
+</div>
+<div id="scoredwords">
+    <h2>Scored Words:</h2>
+    <ul id="scoredwordslist"></ul>
+</div>
+<hr>
+<form action="/game.html" id="form_guess" class="forms" method="GET">
+    <div class="form-group">
+        <label for="search_input" id="label">Word Guesses:</label>
+        <input class="form-control form-control-lg" type="text" placeholder="type word guess here" id="search_input">
+        <button type="submit" class="btn btn-outline-secondary" id="submission">Submit</button>
+    </div>
 </form>
+<div id="wrong"></div>
 {% endblock %}
