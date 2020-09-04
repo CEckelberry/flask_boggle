@@ -10,8 +10,10 @@ app.config["SECRET_KEY"] = "abc123"
 @app.route("/")
 def home_page():
     """Homepage with really big button to start the game"""
+
     board = boggle_game.make_board()
     session["board"] = board
+    nplays = session.get("nplays", 0)
     return render_template("home.html")
 
 
@@ -28,3 +30,18 @@ def check_word():
     valid = boggle_game.check_valid_word(session["board"], user_guess)
     # print(valid)
     return jsonify({"result": valid})
+
+
+@app.route("/update-stats", methods=["POST"])
+def update_stats():
+    highscore = 0
+    score = request.json["score"]
+    if score > highscore:
+        highscore = score
+    print(score)
+    print(highscore)
+    session["highscore"] = highscore
+    nplays = session.get("nplays", 0)
+    session["nplays"] = nplays + 1
+    print(nplays)
+    return jsonify({"score": score})

@@ -1,25 +1,3 @@
-.game-board {
-	display: grid;
-	grid-template-columns: 120px 120px 120px 120px 120px;
-	grid-template-rows: 120px 120px 120px 120px 120px 20px;
-	justify-content: center;
-	margin-top: 4rem;
-}
-
-.box {
-	background-color: #d9d9d9;
-	border: 4px solid black;
-	text-align: center;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	font-size: 35px;
-	outline-style: solid;
-	outline-width: 3px;
-	box-shadow: 6px 11px 25px 0px rgba(0, 0, 0, 0.75);
-	font-family: 'Fredoka One', cursive;
-}
-
 h1 {
 	display: flex;
 	font-size: 50px;
@@ -31,7 +9,7 @@ h1 {
 h2 {
 	display: flex;
 	font-size: 36px;
-	margin-top: 2rem;
+	margin-top: .5rem;
 	font-family: 'Fredoka One', cursive;
 }
 
@@ -91,8 +69,6 @@ hr {
 
 body {
 	background-image: url("/static/simone-hutsch-XzSFaKBXjBQ-unsplash.png");
-	background-repeat: no-repeat;
-	background-size: cover;
 }
 
 #start {
@@ -101,10 +77,22 @@ body {
 
 #timer {
 	color: black;
-	border: 4px solid black;
 	width: 15%;
-	font-size: 32px;
+	padding: .25px;
+	font-size: 38px;
 	text-align: center;
 	font-family: 'Open Sans', sans-serif;
 	margin-left: 2rem;
+}
+
+#reset {
+	margin-bottom: 2rem;
+}
+
+#stats {
+	display: flex;
+	font-size: 36px;
+	justify-content: center;
+	margin-top: 2rem;
+	font-family: 'Fredoka One', cursive;
 }

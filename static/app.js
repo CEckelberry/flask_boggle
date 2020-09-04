@@ -1,14 +1,15 @@
 const form = document.querySelector('#form_guess');
 const input = document.querySelector('#search_input');
 const guesses = [];
-let $timer = 60;
+let $count = 1;
+let $timer = 30;
 let $score = 0;
 document.getElementById('scoreboard').innerHTML = 'Score: ' + $score;
 document.getElementById('timer').innerHTML = 'Timer: ' + $timer;
 
 async function get_word_attempt(guess) {
 	const resp = await axios.get('/check-word', { params: { word: guess } });
-	let $search_term = guess;
+	//let $search_term = guess;
 	//console.log($search_term);
 	//console.log(resp.data['result']);
 
@@ -61,5 +62,30 @@ let decreaseTime = setInterval(function() {
 	document.getElementById('timer').innerHTML = 'Timer: ' + $timer;
 	if ($timer < 1) {
 		document.getElementById('timer').innerHTML = 'Expired!';
+		document.getElementById('search_input').outerHTML =
+			'<input class="form-control form-control-lg" type="text" placeholder="Game Over" id="search_input" disabled>';
+		document.getElementById('submission').outerHTML =
+			'<button type="submit" class="btn btn-outline-elegant" id="submission" disabled>Game Over!</button>';
+		createReset();
 	}
 }, 1000);
+
+function createReset() {
+	if ($count === 1) {
+		let $resetBtn = $(
+			`<a href="/"> <button type="button" class="btn btn-elegant btn-lg btn-block container" id="reset">RESET</button></a>`
+		);
+		$('#resetspot').append($resetBtn);
+		$count = 0;
+
+		document.getElementById('reset').addEventListener('click', function(e) {
+			//e.preventDefault();
+			console.log('reset button clicked');
+			get_stats();
+		});
+	}
+}
+
+async function get_stats() {
+	const resp = await axios.post('/update-stats', { score: $score });
+}

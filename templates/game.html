@@ -5,32 +5,39 @@
 {% block content %}
 
 <h1>Boggle your brain on this one!</h1>
-<h3 id=scoreboard></h3>
-<div id="timer"></div>
-<div class = "game-board container">
+<h3 id=scoreboard class="animated zoomIn"></h3>
+<div id="timer" class="animated zoomIn"></div>
+<div class = "game-board container animated zoomIn">
     {% for word in session['board'] %}
         {% for letter in word %}
             <div class="box">{{letter}}</div>
         {% endfor %}
     {% endfor %}
 </div>
+
+<div id="stats"><p><b>Games Played:</b>{{session['nplays']}} &nbsp;| &nbsp;<b>HighScore:</b>{{session['highscore']}}</p></div>
 <br>
 <br>
-<div id="guessedwords">
+<div id="guessedwords" class="animated zoomIn">
     <h2>Guessed Words:</h2>
     <ul id="guesswordslist"></ul>
 </div>
-<div id="scoredwords">
+<div id="scoredwords" class="animated zoomIn">
     <h2>Scored Words:</h2>
     <ul id="scoredwordslist"></ul>
 </div>
 <hr>
-<form action="/game.html" id="form_guess" class="forms" method="GET">
+<form action="/game.html" id="form_guess" class="forms animated zoomIn" method="GET">
     <div class="form-group">
         <label for="search_input" id="label">Word Guesses:</label>
         <input class="form-control form-control-lg" type="text" placeholder="type word guess here" id="search_input">
-        <button type="submit" class="btn btn-outline-secondary" id="submission">Submit</button>
+        <button type="submit" class="btn blue-gradient" id="submission">Submit</button>
     </div>
 </form>
+
+
+<div class="container" id="resetspot"></div>
+
+
 <div id="wrong"></div>
 {% endblock %}
