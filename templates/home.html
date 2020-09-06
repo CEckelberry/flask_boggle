@@ -4,11 +4,16 @@
 
 {% block content %}
 
-<h1 id="start" class="animated">The button below will start a game of Boggle!</h1>
+
 
 <form action="/game" method="POST">
     <div class="container">
+        <h1 id="start" class="animated">The button below will start a game of Boggle!</h1>
         <button class="btn btn-mdb-color btn-lg btn-block">Start Boggle</button>
     </div>
 </form>
+
+<div class="stats">
+    <p><b>Games Played: &nbsp;</b>{{session['nplays']}} &nbsp;| &nbsp;<b>Highest Score: &nbsp;</b>{{session['highscore']}}</p>
+</div>
 {% endblock %}

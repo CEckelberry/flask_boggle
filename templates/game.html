@@ -15,9 +15,8 @@
     {% endfor %}
 </div>
 
-<div id="stats"><p><b>Games Played:</b>{{session['nplays']}} &nbsp;| &nbsp;<b>HighScore:</b>{{session['highscore']}}</p></div>
-<br>
-<br>
+<div class="stats"><p><b>Games Played: &nbsp;</b>{{session['nplays']}} &nbsp;| &nbsp;<b>Highest Score: &nbsp;</b>{{session['highscore']}}</p></div>
+
 <div id="guessedwords" class="animated zoomIn">
     <h2>Guessed Words:</h2>
     <ul id="guesswordslist"></ul>
